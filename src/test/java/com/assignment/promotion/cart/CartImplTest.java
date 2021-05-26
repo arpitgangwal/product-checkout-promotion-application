@@ -18,7 +18,7 @@ class CartImplTest {
     void setUp() {
         productList= new ArrayList<>();
         promotionSet = new HashSet<>();
-        System.setProperty("promotionNumber","1");
+        System.setProperty("promotionNumber","3");
 
         cartImpl = new CartImpl(productList,promotionSet);
 
@@ -72,6 +72,8 @@ class CartImplTest {
 
     @org.junit.jupiter.api.Test
     void getCheckoutPriceTestPromotionWithMultiple() {
+        System.setProperty("promotionNumber","1");
+
         productList.add(C.getInstance());
         productList.add(B.getInstance());
         productList.add(A.getInstance());
@@ -84,4 +86,34 @@ class CartImplTest {
                 () -> {  new CartImpl(productList,promotionSet); }
         );    }
 
+
+    @org.junit.jupiter.api.Test
+    void getCheckoutPriceTestScenario1() {
+        productList.add(A.getInstance());
+        productList.add(B.getInstance());
+        productList.add(C.getInstance());
+        promotionSet.add(new PromotionASet(new Date()));
+        promotionSet.add(new PromotionHybridSet(new Date()));
+        promotionSet.add(new PromotionBSet(new Date()));
+        assertEquals(cartImpl.getCheckoutPrice(), 100.0);
+    }
+
+    @org.junit.jupiter.api.Test
+    void getCheckoutPriceTestScenario2() {
+        productList.add(A.getInstance());
+        productList.add(A.getInstance());
+        productList.add(A.getInstance());
+        productList.add(A.getInstance());
+        productList.add(A.getInstance());
+        productList.add(B.getInstance());
+        productList.add(B.getInstance());
+        productList.add(B.getInstance());
+        productList.add(B.getInstance());
+        productList.add(B.getInstance());
+        productList.add(C.getInstance());
+        promotionSet.add(new PromotionASet(new Date()));
+        promotionSet.add(new PromotionHybridSet(new Date()));
+        promotionSet.add(new PromotionBSet(new Date()));
+        assertEquals(cartImpl.getCheckoutPrice(), 370.0);
+    }
 }
