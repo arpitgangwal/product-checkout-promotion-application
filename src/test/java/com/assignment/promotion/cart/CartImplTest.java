@@ -114,6 +114,7 @@ class CartImplTest {
         promotionSet.add(new PromotionASet(new Date()));
         promotionSet.add(new PromotionHybridSet(new Date()));
         promotionSet.add(new PromotionBSet(new Date()));
+        promotionSet.add(new PromotionBSet(new Date()));
         assertEquals(cartImpl.getCheckoutPrice(), 370.0);
     }
 }
