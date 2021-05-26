@@ -1,16 +1,12 @@
 package com.assignment.promotion.promotion;
 
-import com.assignment.promotion.cart.CartImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PromotionASetTest {
     PromotionASet promotionASet;
@@ -30,6 +26,6 @@ class PromotionASetTest {
 
     @Test
     void isActive(){
-        assertEquals(promotionASet.isActive(),true);
+        assertTrue(promotionASet.isActive());
     }
 }

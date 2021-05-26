@@ -3,19 +3,16 @@ package com.assignment.promotion.cart;
 import com.assignment.promotion.product.Product;
 import com.assignment.promotion.promotion.Promotion;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.stream.Collectors;
 
 public class CartImpl implements Cart{
-    private List<Product> products;
-    private Set<Promotion> promotions;
-    private int promotionNumber= Integer.parseInt(System.getProperty("promotionNumber"));
-    CartImpl(List<Product> productsSet, Set<Promotion> promotionSet){
+    private final List<Product> products;
+    private final List<Promotion> promotions;
+    private final int promotionNumber= Integer.parseInt(System.getProperty("promotionNumber"));
+    CartImpl(List<Product> productsSet, List<Promotion> promotionSet){
         this.products = productsSet;
         this.promotions = promotionSet;
         if(promotionSet.size()>promotionNumber)
@@ -29,14 +26,14 @@ public class CartImpl implements Cart{
     }
 
     @Override
-    public Set<Promotion> getPromotion() {
+    public List<Promotion> getPromotion() {
         return promotions;
     }
 
     @Override
     public double getCheckoutPrice() {
-      double totalAmount = products.stream().collect(Collectors.summingDouble(p ->p.getPrice()));
-      List<String> productNameList = products.stream().map(p->p.getName()).collect(Collectors.toList());
+      double totalAmount = products.stream().mapToDouble(Product::getPrice).sum();
+      List<String> productNameList = products.stream().map(Product::getName).collect(Collectors.toList());
 
       List<Promotion> promotionApplicable = promotions.stream().filter(prom -> {
                   if (prom.isActive())
@@ -45,7 +42,7 @@ public class CartImpl implements Cart{
               }
         ).collect(Collectors.toList());
 
-      double promotionDiscounted = promotionApplicable.stream().collect(Collectors.summingDouble(p->p.getPromotionPrice()));
+      double promotionDiscounted = promotionApplicable.stream().mapToDouble(Promotion::getPromotionPrice).sum();
       return totalAmount-promotionDiscounted;
     }
 

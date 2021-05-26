@@ -1,6 +1,5 @@
 package com.assignment.promotion.promotion;
 
-import com.assignment.promotion.product.A;
 import com.assignment.promotion.product.C;
 import com.assignment.promotion.product.D;
 import com.assignment.promotion.product.Product;
@@ -19,12 +18,12 @@ public class PromotionHybridSet extends AbstractPromotion{
 
     @Override
     public double getPromotionPrice() {
-        return Arrays.asList(PRODUCT_ARRAY).stream().collect(Collectors.summingDouble(p->p.getPrice()))-30;
+        return Arrays.asList(PRODUCT_ARRAY).stream().mapToDouble(Product::getPrice).sum() -30;
     }
 
     @Override
     public List<String> getProductsName() {
-        return Arrays.asList(PRODUCT_ARRAY).stream().map(p->p.getName()).collect(Collectors.toList());
+        return Arrays.asList(PRODUCT_ARRAY).stream().map(Product::getName).collect(Collectors.toList());
     }
 
 }

@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class CartImplTest {
      CartImpl cartImpl;
      List<Product> productList;
-     Set<Promotion> promotionSet;
+     List<Promotion> promotionSet;
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         productList= new ArrayList<>();
-        promotionSet = new HashSet<>();
+        promotionSet = new ArrayList<>();
         System.setProperty("promotionNumber","3");
 
         cartImpl = new CartImpl(productList,promotionSet);

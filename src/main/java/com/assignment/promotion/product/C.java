@@ -3,7 +3,7 @@ package com.assignment.promotion.product;
 public class C implements Product {
     private static C c;
 
-    private C(){};
+    private C(){}
 
     public static C getInstance(){
         if (c ==null)
