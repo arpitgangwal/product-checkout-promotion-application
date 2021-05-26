@@ -27,4 +27,9 @@ class PromotionASetTest {
     void getProductsName() {
         assertEquals(3, promotionASet.getProductsName().size());
     }
+
+    @Test
+    void isActive(){
+        assertEquals(promotionASet.isActive(),true);
+    }
 }

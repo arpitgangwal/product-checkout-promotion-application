@@ -12,9 +12,7 @@ public abstract class AbstractPromotion implements Promotion {
     }
 
     public boolean isActive() {
-      //  if(date.before(new Date()))
         return true;
-       // return false;
     }
 
 }

@@ -27,4 +27,8 @@ class PromotionHybridSetTest {
         assertEquals("D", promotionCSet.getProductsName().get(1));
 
     }
+    @Test
+    void isActive(){
+        assertEquals(promotionCSet.isActive(),true);
+    }
 }
